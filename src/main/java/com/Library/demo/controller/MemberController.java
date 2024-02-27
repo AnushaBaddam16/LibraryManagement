@@ -1,6 +1,7 @@
 package com.Library.demo.controller;
 
 import com.Library.demo.model.Member;
+import com.Library.demo.entity.LibraryMember;
 import com.Library.demo.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,25 +15,25 @@ public class MemberController {
 
     // Get a member by memberId
     @GetMapping("/{memberId}")
-    public Member getMember(@PathVariable Long memberId) {
+    public LibraryMember getMember(@PathVariable Integer memberId) {
         return memberService.getMember(memberId);
     }
 
     // Create a member
     @PostMapping
-    public Member createMember(@RequestBody Member member) {
+    public LibraryMember createMember(@RequestBody LibraryMember member) {
         return memberService.createMember(member);
     }
 
     // Update a member
     @PutMapping("/{memberId}")
-    public Member updateMember(@PathVariable Long memberId, @RequestBody Member updatedMember) {
+    public LibraryMember updateMember(@PathVariable Integer memberId, @RequestBody LibraryMember updatedMember) {
         return memberService.updateMember(memberId, updatedMember);
     }
 
     // Delete a member by memberId
     @DeleteMapping("/{memberId}")
-    public void deleteMember(@PathVariable Long memberId) {
+    public void deleteMember(@PathVariable Integer memberId) {
         memberService.deleteMember(memberId);
     }
 }

@@ -1,6 +1,6 @@
 package com.Library.demo.controller;
 
-import com.Library.demo.model.Book;
+import com.Library.demo.entity.Book;
 import com.Library.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +13,13 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
-    @GetMapping
+  /*  @GetMapping
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
-    }
+    }*/
 
     @GetMapping("/{bookId}")
-    public Book getBookById(@PathVariable Long bookId) {
+    public Book getBookById(@PathVariable Integer bookId) {
         return bookService.getBook(bookId);
     }
 
@@ -29,11 +29,11 @@ public class BookController {
     }
 
     @PutMapping("/{bookId}")
-    public Book updateBook(@PathVariable Long bookId, @RequestBody Book updatedBook) {
+    public Book updateBook(@PathVariable Integer bookId, @RequestBody Book updatedBook) {
         return bookService.updateBook(bookId, updatedBook);
     }
     @DeleteMapping("/{bookId}")
-    public void deleteBook(@PathVariable Long bookId) {
+    public void deleteBook(@PathVariable Integer bookId) {
         bookService.deleteBook(bookId);
     }
 }
