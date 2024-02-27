@@ -1,47 +1,49 @@
 package com.Library.demo.service;
 
-import com.Library.demo.model.Book;
+import com.Library.demo.entity.Book;
+import com.Library.demo.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Service
 public class BookService {
 
-    private Map<Long, Book> bookMap = new HashMap<>();
+    @Autowired
+    private BookRepository bookRepository;
+
+    public Book updateBook(Integer bookId, Book updatedBook) {
+        Optional<Book> existingBookOptional = bookRepository.findById(bookId);
+
+        if (existingBookOptional.isPresent()) {
+            Book existingBook = existingBookOptional.get();
+            existingBook.setTitle(updatedBook.getTitle());
+            existingBook.setAuthor(updatedBook.getAuthor());
+            existingBook.setYear_published(updatedBook.getYear_published());
+           // existingBook.setisbn(updatedBook.getIsbn());
+            return bookRepository.save(existingBook);
+        } else {
+            return null;
+        }
+    }
+
+    public void deleteBook(Integer bookId) {
+        bookRepository.deleteById(bookId);
+    }
 
     public Book createBook(Book book) {
-        // Simulating database insert
-        Long bookId = new Random().nextLong();
+
+        Integer bookId = new Random().nextInt();
         book.setBookId(bookId);
-        bookMap.put(bookId, book);
-        return book;
+        return bookRepository.save(book);
     }
 
-    public Book getBook(Long bookId) {
-        return bookMap.get(bookId);
-    }
-
-    public List<Book> getAllBooks() {
-        return bookMap.values().stream().collect(Collectors.toList());
-    }
-
-    public Book updateBook(Long bookId, Book updatedBook) {
-        if (bookMap.containsKey(bookId)) {
-            // Simulating database update
-            updatedBook.setBookId(bookId);
-            bookMap.put(bookId, updatedBook);
-            return updatedBook;
-        }
-        return null; // Book not found for the given bookId
-    }
-
-    public void deleteBook(Long bookId) {
-        bookMap.remove(bookId);
-        // Simulating database delete
+    public Book getBook(Integer bookId) {
+        Optional<Book> bookOptional = bookRepository.findById(bookId);
+        return bookOptional.orElse(new Book());
     }
 }
