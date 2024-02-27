@@ -2,18 +2,21 @@ package com.Library.demo.model;
 
 public class Book {
 
-    private long bookId;
+    private Integer bookId;
     private String title;
     private String author;
     private String isbn;
     private double price;
+    private Integer year_published;
+    private Integer quantity;
+
     private String genre;
 
-    public long getBookId() {
+    public Integer getBookId() {
         return bookId;
     }
 
-    public void setBookId(long bookId) {
+    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 
@@ -33,27 +36,20 @@ public class Book {
         this.author = author;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public Integer getYear_published() {
+        return year_published;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setYear_published(Integer year_published) {
+        this.year_published = year_published;
     }
 
-    public double getPrice() {
-        return price;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
 }
